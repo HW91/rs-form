@@ -1,84 +1,130 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Resume Screener with Zoho & Make.com Integration</title>
-</head>
-<body>
-
-  <!-- Simulated portal header (your real page will already have this) -->
-  <header style="display:none;">
-    <span class="theme-portal-username" data-portal-user-name>
-      Hi, optiontrader91
-    </span>
-  </header>
-
-  <!-- 1) This is where Zoho will inject the form -->
-  <div id="zohoFormContainer"></div>
-
-  <!-- 2) Load Zoho’s official embed library -->
-  <script src="https://forms.zohopublic.com/xoo/form/ResumeScreenerDynamicFiles/js/responsive.js"></script>
-
-  <!-- 3) Initialization: extract username, build submissionId, embed & hook onSuccess -->
-  <script>
-  document.addEventListener('DOMContentLoaded', function(){
-
-    // A) Extract the logged-in portal username once
-    let username = '';
-    (function(){
-      const span = document.querySelector(
-        'span.theme-portal-username[data-portal-user-name]'
-      );
-      if (span) {
-        username = span.textContent.replace(/^Hi,\s*/i,'').trim();
-      }
-      console.log("Extracted portal username:", username);
-    })();
-
-    // B) Build a unique Submission ID
-    const submissionId = username + "_" + Date.now();
-    console.log("Built submissionId:", submissionId);
-
-    // C) When Zoho’s embed script is ready...
-    ZOHO.embeddedApp.on("load", function(){
-      ZOHO.embeddedApp.init({
-        // 1) Which DIV to render into
-        formContainer: "zohoFormContainer",
-        // 2) Your Zoho form’s permanent ID
-        formId:        "pjPYaosmnAbiv52anOuMikTY1WLRcIJuHqmUfs3VlGU",
-
-        // 3) Each time the form loads, prefill these two hidden fields
-        onFormLoad: function(zohoForm) {
-          ZOHO.embeddedApp.addFieldToForm(zohoForm, "Username",      username);
-          ZOHO.embeddedApp.addFieldToForm(zohoForm, "Submission ID", submissionId);
-        },
-
-        // 4) As soon as Zoho confirms the user’s submit…
-        onSuccess: function(zohoData){
-          console.log("Zoho form submitted:", zohoData);
-
-          // 5) Fire your Make.com webhook immediately
-          fetch("https://hook.us1.make.com/n2qll3gblut2oqd6x7x149i650l3s1dx", {
-            method:  "POST",
-            headers: { "Content-Type":"application/json" },
-            body:    JSON.stringify({
-              "Username":       username,
-              "Submission ID":  submissionId,
-              // you can also pass along Zoho’s own response data:
-              "zohoRawData":    zohoData
-            })
-          })
-          .then(r => {
-            if (r.ok)  console.log("✅ Make.com webhook OK");
-            else       console.warn("⚠️ Make.com returned", r.status);
-          })
-          .catch(err => console.error("❌ Webhook error:", err));
-        }
-      });
-    });
-
-  });
-  </script>
-
-</body>
-</html>
+<!-- Change or deletion of the name attributes in the input tag will lead to empty values on record submission-->
+<form action='https://forms.zohopublic.com/xoo/form/ResumeScreenerDynamicFiles/formperma/8bJeczOwkqnE0WsxRYtFOAGeB6tq--e_dU__xQoOFmc/htmlRecords/submit' name='form' id='form' method='POST' accept-charset='UTF-8' enctype='multipart/form-data'>
+<input type="hidden" name="zf_referrer_name" value=""><!-- To Track referrals , place the referrer name within the " " in the above hidden input field -->
+<input type="hidden" name="zf_redirect_url" value=""><!-- To redirect to a specific page after record submission , place the respective url within the " " in the above hidden input field -->
+<input type="hidden" name="zc_gad" value=""><!-- If GCLID is enabled in Zoho CRM Integration, click details of AdWords Ads will be pushed to Zoho CRM -->
+<h2>Resume Screener Dynamic</h2>
+<p></p>
+<!--Dropdown-->
+<label>
+Step 1. Choose job source
+<em>*</em>
+</label>
+<select name="Dropdown">
+<option selected="true" value="-Select-">-Select-</option>
+<option value="Copy&#x20;&amp;&#x20;Paste">Copy &amp; Paste</option>
+<option value="Public&#x20;URL">Public URL</option>
+<option value="Upload&#x20;File">Upload File</option>
+<option value="ATS&#x2f;CRM&#x20;&#x28;Coming&#x20;soon&#x21;&#x29;">ATS&#x2f;CRM &#x28;Coming soon&#x21;&#x29;</option>
+</select>
+<!--Website-->
+<label> Option 1&#x3a; Job URL 
+</label>
+<input type="text" maxlength="2083" name="Website" value="" placeholder="" />
+<p>Enter public facing job url https&#x3a;&#x2f;&#x2f;sample.com&#x2f;jobboard_engineer_duties</p>
+<!--File Upload-->
+<label>Option 2&#x3a; Job Upload
+</label>
+<input type="file"  name="FileUpload1" checktype="c1"/>
+<!--Multi Line-->
+<label> Option 3&#x3a; Paste Job Description 
+</label>
+<textarea name="MultiLine1" maxlength="65535" placeholder="" ></textarea>
+<p>Copy and paste your job description here</p>
+<!--Dropdown-->
+<label>
+Step 2. Choose resume source
+<em>*</em>
+</label>
+<select name="Dropdown1">
+<option selected="true" value="-Select-">-Select-</option>
+<option value="Copy&#x20;&amp;&#x20;Paste">Copy &amp; Paste</option>
+<option value="Public&#x20;URL">Public URL</option>
+<option value="Upload&#x20;File">Upload File</option>
+<option value="ATS&#x2f;CRM&#x20;&#x28;Coming&#x20;soon&#x21;&#x29;">ATS&#x2f;CRM &#x28;Coming soon&#x21;&#x29;</option>
+</select>
+<!--Website-->
+<label> Option 1&#x3a; Resume&#x28;s&#x29; URL 
+</label>
+<input type="text" maxlength="2083" name="Website1" value="" placeholder="" />
+<p>Enter public facing job url https&#x3a;&#x2f;&#x2f;sample.com&#x2f;resumes_candidate1</p>
+<!--File Upload-->
+<label>Option 2&#x3a; Resume&#x28;s&#x29; Upload
+</label>
+<input type="file"  name="FileUpload" checktype="c1"  multiple="multiple"/>
+<p> Upload up to 10 files.</p>
+<!--Multi Line-->
+<label> Option 3&#x3a; Paste Resume &#x23;1 
+</label>
+<textarea name="MultiLine" maxlength="65535" placeholder="" ></textarea>
+<p>Copy and paste your resume here.</p>
+<!--Multi Line-->
+<label> Option 3&#x3a; Paste Resume &#x23;2 
+</label>
+<textarea name="MultiLine3" maxlength="65535" placeholder="" ></textarea>
+<p>Copy and paste your resume here.</p>
+<!--Multi Line-->
+<label> Option 3&#x3a; Paste Resume &#x23;3 
+</label>
+<textarea name="MultiLine4" maxlength="65535" placeholder="" ></textarea>
+<p>Copy and paste your resume here.</p>
+<!--Multi Line-->
+<label> Option 3&#x3a; Paste Resume &#x23;4 
+</label>
+<textarea name="MultiLine11" maxlength="65535" placeholder="" ></textarea>
+<p>Copy and paste your resume here.</p>
+<!--Multi Line-->
+<label> Option 3&#x3a; Paste Resume &#x23;5 
+</label>
+<textarea name="MultiLine10" maxlength="65535" placeholder="" ></textarea>
+<p>Copy and paste your resume here.</p>
+<!--Multi Line-->
+<label> Option 3&#x3a; Paste Resume &#x23;6 
+</label>
+<textarea name="MultiLine9" maxlength="65535" placeholder="" ></textarea>
+<p>Copy and paste your resume here.</p>
+<!--Multi Line-->
+<label> Option 3&#x3a; Paste Resume &#x23;7 
+</label>
+<textarea name="MultiLine8" maxlength="65535" placeholder="" ></textarea>
+<p>Copy and paste your resume here.</p>
+<!--Multi Line-->
+<label> Option 3&#x3a; Paste Resume &#x23;8 
+</label>
+<textarea name="MultiLine7" maxlength="65535" placeholder="" ></textarea>
+<p>Copy and paste your resume here.</p>
+<!--Multi Line-->
+<label> Option 3&#x3a; Paste Resume &#x23;9 
+</label>
+<textarea name="MultiLine6" maxlength="65535" placeholder="" ></textarea>
+<p>Copy and paste your resume here.</p>
+<!--Multi Line-->
+<label> Option 3&#x3a; Paste Resume &#x23;10 
+</label>
+<textarea name="MultiLine5" maxlength="65535" placeholder="" ></textarea>
+<p>Copy and paste your resume here.</p>
+<!--Dropdown-->
+<label>
+Step 3. Add additional screening questions&#x3a;
+</label>
+<select name="Dropdown2">
+<option selected="true" value="-Select-">-Select-</option>
+<option value="Yes">Yes</option>
+<option value="No">No</option>
+</select>
+<!--Single Line-->
+<label> 
+Question 1&#x3a;
+</label>
+<input  type="text" name="SingleLine" value="" fieldType=1 maxlength="255" placeholder="" />
+<!--Single Line-->
+<label> 
+Question 2&#x3a;
+</label>
+<input  type="text" name="SingleLine1" value="" fieldType=1 maxlength="255" placeholder="" />
+<!--Single Line-->
+<label> 
+Question 3&#x3a;
+</label>
+<input  type="text" name="SingleLine2" value="" fieldType=1 maxlength="255" placeholder="" />
+<button type="submit"><em>Submit</em></button></form>
