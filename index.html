@@ -1,5 +1,9 @@
-<!-- Change or deletion of the name attributes in the input tag will lead to empty values on record submission-->
-<form action='https://forms.zohopublic.com/xoo/form/ResumeScreenerDynamicFiles/formperma/8bJeczOwkqnE0WsxRYtFOAGeB6tq--e_dU__xQoOFmc/htmlRecords/submit' name='form' id='form' method='POST' accept-charset='UTF-8' enctype='multipart/form-data'>
+<form action="https://forms.zohopublic.com/xoo/form/ResumeScreenerDynamicFiles/formperma/8bJeczOwkqnE0WsxRYtFOAGeB6tq--e_dU__xQoOFmc/htmlRecords/submit"
+      name="form"
+      id="form"
+      method="POST"
+      accept-charset="UTF-8"
+      enctype="multipart/form-data">
   <input type="hidden" name="zf_referrer_name" value="">
   <input type="hidden" name="zf_redirect_url" value="">
   <input type="hidden" name="zc_gad" value="">
@@ -74,14 +78,20 @@
 
 <script>
   document.addEventListener("DOMContentLoaded", function () {
-    const interval = setInterval(() => {
-      const userElement = document.querySelector('.theme-portal-username');
-      const usernameField = document.getElementById("username");
-      if (userElement && userElement.textContent.trim() !== "") {
-        const rawText = userElement.textContent.trim();
-        usernameField.value = rawText.replace(/^Hi,\s*/i, '');
-        clearInterval(interval);
-      }
-    }, 300);
+    const form = document.getElementById("form");
+    form.addEventListener("submit", function (e) {
+      e.preventDefault(); // pause the submit
+
+      const interval = setInterval(() => {
+        const userEl = document.querySelector(".theme-portal-username");
+        if (userEl && userEl.textContent.trim() !== "") {
+          // strip any leading “Hi,”
+          const cleanName = userEl.textContent.trim().replace(/^Hi,\s*/i, "");
+          document.getElementById("username").value = cleanName;
+          clearInterval(interval);
+          form.submit(); // resume submit
+        }
+      }, 100);
+    });
   });
 </script>
