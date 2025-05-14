@@ -1,97 +1,662 @@
-<form action="https://forms.zohopublic.com/xoo/form/ResumeScreenerDynamicFiles/formperma/8bJeczOwkqnE0WsxRYtFOAGeB6tq--e_dU__xQoOFmc/htmlRecords/submit"
-      name="form"
-      id="form"
-      method="POST"
-      accept-charset="UTF-8"
-      enctype="multipart/form-data">
-  <input type="hidden" name="zf_referrer_name" value="">
-  <input type="hidden" name="zf_redirect_url" value="">
-  <input type="hidden" name="zc_gad" value="">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- CSP to allow Zoho form submissions -->
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src * 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval' 'unsafe-inline';
+                 style-src * 'self' 'unsafe-inline';
+                 script-src * 'self' 'unsafe-inline' 'unsafe-eval';
+                 connect-src * 'self';
+                 img-src * data: blob: 'self';
+                 frame-src *;
+                 object-src 'none';">
+  <title>Resume Screener Form Dynamic</title>
+  <style>
+    /* ---------- YOUR EXISTING STYLES ---------- */
+    body { font-family: Arial, sans-serif; margin:0; padding:20px;}
+    .header { background:#f5f5f5; padding:10px 20px; border-bottom:1px solid #ddd; display:flex; justify-content:space-between; align-items:center; }
+    .form-container { max-width:600px; margin:30px auto; padding:20px; border:1px solid #ddd; border-radius:5px; background:#f6f7fb; }
+    .form-title { margin-top:0; margin-bottom:20px; color:#333; }
+    .form-field { margin-bottom:20px; }
+    label { display:block; margin-bottom:5px; font-weight:bold; color:#555; }
+    input[type="text"], select, textarea { width:100%; padding:10px; border:1px solid #ccc; border-radius:4px; font-size:16px; }
+    textarea { height:120px; resize:both; min-height:100px; position:relative; }
+    .resize-indicator { position:absolute; right:10px; bottom:10px; width:10px; height:10px; pointer-events:none; border-right:2px solid #ccc; border-bottom:2px solid #ccc; }
+    .submit-btn { background:#33495E; color:#fff; padding:12px 40px; border:none; border-radius:30px; cursor:pointer; font-size:18px; display:block; margin:0 auto; }
+    .submit-btn:hover { background:#140F3B; }
+    small { color:#666; font-size:12px; margin-top:2px; display:block; }
+    .form-response { padding:15px; margin-top:20px; border-radius:4px; display:none; }
+    .success { background:#dff0d8; color:#3c763d; border:1px solid #d6e9c6; }
+    .error { background:#f2dede; color:#a94442; border:1px solid #ebccd1; }
+    .conditional-field { display:none; }
+    /* Loading overlay */
+    .loading-overlay { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(255,255,255,0.9); z-index:1000; justify-content:center; align-items:center; flex-direction:column; }
+    .loading-container { text-align:center; }
+    svg { width:100px; height:100px; }
+    .circle { fill:none; stroke:#33495e; stroke-width:6; stroke-linecap:round; transform-origin:50% 50%; stroke-dasharray:80 283; stroke-dashoffset:0; }
+    .spinning { animation:spin 1s linear infinite; }
+    @keyframes spin { from {transform:rotate(0deg);} to {transform:rotate(360deg);} }
+    .check { fill:none; stroke:#33495e; stroke-width:6; stroke-linecap:round; opacity:0; }
+    @keyframes drawCheck { from { stroke-dashoffset:57; opacity:0; } to { stroke-dashoffset:0; opacity:1; } }
+    #loading-text { font-family:Arial,sans-serif; font-size:16px; font-weight:bold; fill:#33495e; text-anchor:middle; dominant-baseline:middle; }
+    #status-message { font-family:Arial,sans-serif; color:#33495e; font-size:16px; margin-top:20px; }
+    /* Resume textareas */
+    .resume-textarea-wrapper { margin-bottom:15px; position:relative; }
+    .resume-textarea-wrapper:not(:first-child) { padding-top:10px; border-top:1px dashed #ccc; }
+    .add-resume-button-container { margin-top:10px; display:flex; align-items:center; justify-content:space-between; }
+    .add-resume-button { background:#f0f0f0; color:#333; padding:8px 15px; border:1px solid #ccc; border-radius:4px; cursor:pointer; display:flex; align-items:center; font-size:14px; }
+    .add-resume-button:hover { background:#e0e0e0; }
+    .plus-icon { font-weight:bold; font-size:18px; margin-right:5px; }
+    .remove-resume-button { background:#f8f8f8; color:#666; border:1px solid #ddd; border-radius:50%; width:24px; height:24px; font-size:14px; line-height:1; cursor:pointer; position:absolute; right:0; top:0; display:flex; align-items:center; justify-content:center; }
+    .remove-resume-button:hover { background:#f0f0f0; color:#e74c3c; }
+    #resume-count-info { margin:0; color:#666; }
+  </style>
+</head>
+<body>
+  <!-- Hidden header for username -->
+  <div class="header" style="display:none;">
+    <div class="user-info">
+      <a href="/account/profile" data-portal-profile="" title="Profile">
+        <span class="theme-portal-username" data-portal-user-name="">Hi, optiontrader91</span>
+      </a>
+    </div>
+  </div>
 
-  <!-- Username field -->
-  <input type="hidden" name="SingleLine3" id="username" value="">
+  <div class="content">
+    <div class="form-container">
+      <form id="customResumeForm" enctype="multipart/form-data">
+        <!-- Hidden fields -->
+        <input type="hidden" id="username" name="username" value="">
+        <input type="hidden" id="submissionId" name="submissionId" value="">
 
-  <h2>Resume Screener Dynamic</h2>
+        <!-- Step 1 -->
+        <div class="form-field">
+          <label for="job">Step 1. Choose job source <span style="color:red;">*</span></label>
+          <select id="job" name="job" required>
+            <option value="">-- Select --</option>
+            <option value="publicURL">Public URL</option>
+            <option value="uploadFile">Upload File</option>
+            <option value="pasteText">Copy & Paste</option>
+            <option value="CRM">ATS/CRM (Coming soon!)</option>
+          </select>
+        </div>
+        <div class="form-field conditional-field job-field" id="joption1-container">
+          <label for="joption1">Option 1: Job URL</label>
+          <input type="text" id="joption1" name="joption1">
+          <small>Enter public facing job url https://sample.com/ats_engineer_duties</small>
+        </div>
+        <div class="form-field conditional-field job-field" id="joption2-container">
+          <label for="joption2">Option 2: Job Upload</label>
+          <input type="file" id="joption2" name="joption2" accept=".pdf,.doc,.docx,.txt">
+          <small>Max file size: 1MB (single file only)</small>
+        </div>
+        <div class="form-field conditional-field job-field" id="joption3-container">
+          <label for="joption3">Option 3: Paste Job Description</label>
+          <textarea id="joption3" name="joption3" placeholder="Copy and paste your job description here"></textarea>
+          <small>You can resize this text box by dragging the bottom-right corner</small>
+        </div>
 
-  <label>Step 1. Choose job source <em>*</em></label>
-  <select name="Dropdown">
-    <option selected="true" value="-Select-">-Select-</option>
-    <option value="Copy &amp; Paste">Copy &amp; Paste</option>
-    <option value="Public URL">Public URL</option>
-    <option value="Upload File">Upload File</option>
-    <option value="ATS/CRM (Coming soon!)">ATS/CRM (Coming soon!)</option>
-  </select>
+        <!-- Step 2 -->
+        <div class="form-field">
+          <label for="resume">Step 2. Choose resume source <span style="color:red;">*</span></label>
+          <select id="resume" name="resume" required>
+            <option value="">-- Select --</option>
+            <option value="publicURL">Public URL</option>
+            <option value="uploadFile">Upload File(s)</option>
+            <option value="pasteText">Copy & Paste</option>
+            <option value="CRM">ATS/CRM (Coming soon!)</option>
+          </select>
+        </div>
+        <div class="form-field conditional-field resume-field" id="roption1-container">
+          <label for="roption1">Option 1: Resume URL</label>
+          <input type="text" id="roption1" name="roption1">
+          <small>Enter public facing resume url https://sample.com/ats-resume</small>
+        </div>
+        <div class="form-field conditional-field resume-field" id="roption2-container">
+          <label for="roption2">Option 2: Resume Upload</label>
+          <input type="file" id="roption2" name="roption2" multiple accept=".pdf,.doc,.docx,.txt,.rtf">
+          <small>Max file size: 1MB per file (up to 10 files)</small>
+        </div>
+        <div class="form-field conditional-field resume-field" id="roption3-container">
+          <div id="resume-textareas-container">
+            <div class="resume-textarea-wrapper">
+              <label for="roption3-1">Option 3: Paste Resume #1</label>
+              <textarea id="roption3-1" name="roption3-1" class="resume-textarea"
+                        placeholder="Copy and paste your resume here"></textarea>
+              <small>You can resize this text box by dragging the bottom-right corner</small>
+            </div>
+          </div>
+          <div class="add-resume-button-container">
+            <button type="button" id="add-resume-button" class="add-resume-button">
+              <span class="plus-icon">+</span> Add Another Resume
+            </button>
+            <small id="resume-count-info">1 of 10 resumes</small>
+          </div>
+        </div>
 
-  <label>Option 1: Job URL</label>
-  <input type="text" maxlength="2083" name="Website" placeholder="">
-  <p>Enter public facing job url https://sample.com/jobboard_engineer_duties</p>
+        <!-- Step 3 -->
+        <div class="form-field">
+          <label for="position">Step 3. Add additional screening questions:</label>
+          <select id="position" name="position">
+            <option value="">-- Select --</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+          </select>
+        </div>
+        <div class="form-field conditional-field question-field">
+          <label for="question1">Question 1:</label>
+          <input type="text" id="question1" name="question1">
+        </div>
+        <div class="form-field conditional-field question-field">
+          <label for="question2">Question 2:</label>
+          <input type="text" id="question2" name="question2">
+        </div>
+        <div class="form-field conditional-field question-field">
+          <label for="question3">Question 3:</label>
+          <input type="text" id="question3" name="question3">
+        </div>
 
-  <label>Option 2: Job Upload</label>
-  <input type="file" name="FileUpload1" checktype="c1" />
+        <button type="submit" class="submit-btn">Submit</button>
+      </form>
+      <div id="formResponse" class="form-response"></div>
+    </div>
+  </div>
 
-  <label>Option 3: Paste Job Description</label>
-  <textarea name="MultiLine1" maxlength="65535"></textarea>
-  <p>Copy and paste your job description here</p>
+  <!-- Loading Animation Overlay -->
+  <div class="loading-overlay" id="loadingOverlay">
+    <div class="loading-container">
+      <svg viewBox="0 0 100 100">
+        <circle id="spinner" class="circle spinning" cx="50" cy="50" r="45"/>
+        <path id="checkmark" class="check" d="M30 50 L45 65 L70 40" stroke-dasharray="57" stroke-dashoffset="57"/>
+        <text id="loading-text" x="50" y="50">Processing...</text>
+      </svg>
+      <p id="status-message">Your resume and job files are being processed...</p>
+    </div>
+  </div>
 
-  <label>Step 2. Choose resume source <em>*</em></label>
-  <select name="Dropdown1">
-    <option selected="true" value="-Select-">-Select-</option>
-    <option value="Copy &amp; Paste">Copy &amp; Paste</option>
-    <option value="Public URL">Public URL</option>
-    <option value="Upload File">Upload File</option>
-    <option value="ATS/CRM (Coming soon!)">ATS/CRM (Coming soon!)</option>
-  </select>
+  <!-- Hidden iframe for Zoho fallback -->
+  <iframe id="zohoTargetFrame" name="zohoTargetFrame" style="display:none;"></iframe>
 
-  <label>Option 1: Resume(s) URL</label>
-  <input type="text" maxlength="2083" name="Website1" placeholder="">
-  <p>Enter public facing resume url https://sample.com/resumes_candidate1</p>
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    //
+    // --- SCORE LOGGING ---
+    //
+    const scoreLog = {
+      entries: [], isComplete: false,
+      addEntry(candidateId, score, details) {
+        this.entries.push({ candidateId, score, details, timestamp: new Date().toISOString() });
+        console.log(`Score added for candidate ${candidateId}: ${score}`);
+        document.dispatchEvent(new CustomEvent('scoreAdded',{detail:{candidateId,score,details}}));
+        this.checkIfComplete();
+      },
+      checkIfComplete() {
+        const expected = window.uploadedResumeCount || 1;
+        if (this.entries.length >= expected) this.markComplete();
+      },
+      markComplete() {
+        this.isComplete = true;
+        console.log("Scoring process complete!");
+        document.dispatchEvent(new CustomEvent('scoringComplete',{detail:{totalEntries:this.entries.length}}));
+        stopLoadingAnimation();
+      },
+      getSummary() {
+        const count = this.entries.length;
+        const avg = count>0 ? this.entries.reduce((s,e)=>s+e.score,0)/count : 0;
+        return { count, averageScore: avg, complete: this.isComplete };
+      }
+    };
+    window.logCandidateScore = (id,score,details)=> scoreLog.addEntry(id,score,details);
+    window.markProcessingComplete = ()=> scoreLog.markComplete();
 
-  <label>Option 2: Resume(s) Upload</label>
-  <input type="file" name="FileUpload" checktype="c1" multiple="multiple"/>
-  <p>Upload up to 10 files.</p>
+    //
+    // --- EXTRACT USERNAME (no polling here; called on submit) ---
+    //
+    function extractUsername() {
+      const span = document.querySelector('span.theme-portal-username[data-portal-user-name]');
+      if (span){
+        let txt = span.textContent.trim().replace(/^Hi,\s*/i,'').trim();
+        if(txt) return txt;
+        const m = span.textContent.match(/Hi,\s*(.*)/i);
+        if(m&&m[1]) return m[1].trim();
+      }
+      // fallback:
+      return 'user_' + Date.now();
+    }
 
-  <!-- Resume Text Areas -->
-  <label>Option 3: Paste Resume #1</label><textarea name="MultiLine" maxlength="65535"></textarea>
-  <label>Option 3: Paste Resume #2</label><textarea name="MultiLine3" maxlength="65535"></textarea>
-  <label>Option 3: Paste Resume #3</label><textarea name="MultiLine4" maxlength="65535"></textarea>
-  <label>Option 3: Paste Resume #4</label><textarea name="MultiLine11" maxlength="65535"></textarea>
-  <label>Option 3: Paste Resume #5</label><textarea name="MultiLine10" maxlength="65535"></textarea>
-  <label>Option 3: Paste Resume #6</label><textarea name="MultiLine9" maxlength="65535"></textarea>
-  <label>Option 3: Paste Resume #7</label><textarea name="MultiLine8" maxlength="65535"></textarea>
-  <label>Option 3: Paste Resume #8</label><textarea name="MultiLine7" maxlength="65535"></textarea>
-  <label>Option 3: Paste Resume #9</label><textarea name="MultiLine6" maxlength="65535"></textarea>
-  <label>Option 3: Paste Resume #10</label><textarea name="MultiLine5" maxlength="65535"></textarea>
+    //
+    // --- CONDITIONAL FIELDS ---
+    //
+    const jobSelect = document.getElementById('job'),
+          jFields = document.querySelectorAll('.job-field'),
+          resumeSelect = document.getElementById('resume'),
+          rFields = document.querySelectorAll('.resume-field'),
+          posSelect = document.getElementById('position'),
+          qFields = document.querySelectorAll('.question-field');
 
-  <label>Step 3. Add additional screening questions:</label>
-  <select name="Dropdown2">
-    <option selected="true" value="-Select-">-Select-</option>
-    <option value="Yes">Yes</option>
-    <option value="No">No</option>
-  </select>
-
-  <label>Question 1:</label><input type="text" name="SingleLine" maxlength="255" />
-  <label>Question 2:</label><input type="text" name="SingleLine1" maxlength="255" />
-  <label>Question 3:</label><input type="text" name="SingleLine2" maxlength="255" />
-
-  <button type="submit"><em>Submit</em></button>
-</form>
-
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const form = document.getElementById("form");
-    form.addEventListener("submit", function (e) {
-      e.preventDefault(); // pause the submit
-
-      const interval = setInterval(() => {
-        const userEl = document.querySelector(".theme-portal-username");
-        if (userEl && userEl.textContent.trim() !== "") {
-          // strip any leading “Hi,”
-          const cleanName = userEl.textContent.trim().replace(/^Hi,\s*/i, "");
-          document.getElementById("username").value = cleanName;
-          clearInterval(interval);
-          form.submit(); // resume submit
-        }
-      }, 100);
+    jobSelect.addEventListener('change',_=>{
+      jFields.forEach(f=>f.style.display='none');
+      if(jobSelect.value==='publicURL')   document.getElementById('joption1-container').style.display='block';
+      if(jobSelect.value==='uploadFile') document.getElementById('joption2-container').style.display='block';
+      if(jobSelect.value==='pasteText')  document.getElementById('joption3-container').style.display='block';
     });
+    resumeSelect.addEventListener('change',_=>{
+      rFields.forEach(f=>f.style.display='none');
+      if(resumeSelect.value==='publicURL')   document.getElementById('roption1-container').style.display='block';
+      if(resumeSelect.value==='uploadFile')  document.getElementById('roption2-container').style.display='block';
+      if(resumeSelect.value==='pasteText')   document.getElementById('roption3-container').style.display='block';
+    });
+    posSelect.addEventListener('change',function(){
+      qFields.forEach(f=>f.style.display=this.value==='yes'?'block':'none');
+    });
+
+    //
+    // --- FILE VALIDATION ---
+    //
+    const MAX_FILE_SIZE = 1*1024*1024,
+          MAX_RESUMES = 10;
+    document.querySelectorAll('input[type="file"]').forEach(input=>{
+      input.addEventListener('change',function(){
+        let valid=true, msg='';
+        if(this.id==='roption2' && this.files.length>MAX_RESUMES) {
+          valid=false; msg=`Max ${MAX_RESUMES} files. You selected ${this.files.length}.`;
+        }
+        if(valid){
+          for(let f of this.files){
+            if(f.size>MAX_FILE_SIZE){
+              valid=false; msg=`One or more files exceed 1 MB.`;
+              break;
+            }
+          }
+        }
+        if(!valid){ alert(msg); this.value=''; }
+      });
+    });
+
+    //
+    // --- LOADING ANIMATION ---
+    //
+    const loadingOverlay = document.getElementById('loadingOverlay'),
+          spinner = document.getElementById('spinner'),
+          checkmark = document.getElementById('checkmark'),
+          loadingText = document.getElementById('loading-text'),
+          statusMessage = document.getElementById('status-message');
+
+    function showLoadingAnimation() {
+      scoreLog.entries = []; scoreLog.isComplete=false;
+      checkmark.style.opacity='0'; spinner.style.opacity='1'; spinner.classList.add('spinning');
+      loadingText.style.opacity='1'; loadingText.textContent='Processing...';
+      statusMessage.textContent='Your resume and job files are being processed...';
+      loadingOverlay.style.display='flex';
+    }
+    function stopLoadingAnimation() {
+      spinner.classList.remove('spinning'); spinner.style.opacity='0';
+      loadingText.style.opacity='0'; checkmark.style.opacity='1';
+      checkmark.style.animation='drawCheck 0.5s forwards';
+      const summary = scoreLog.getSummary();
+      statusMessage.textContent=`Processing complete! ${summary.count} resume(s) analyzed. Redirecting...`;
+      setTimeout(_=>window.location.href="https://www.getpurplesquirrel.com/resume-screener-app",2000);
+    }
+
+    //
+    // --- FILE → BASE64 HELPERS ---
+    //
+    function fileToBase64(file){
+      return new Promise((res,rej)=>{
+        const reader=new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = ()=> {
+          let b64 = reader.result.split(',')[1];
+          res({base64:b64,name:file.name,type:file.type,size:file.size});
+        };
+        reader.onerror = e=>rej(e);
+      });
+    }
+    async function processFilesToBase64(formData){
+      const jobVal = jobSelect.value, resumeVal = resumeSelect.value;
+      if(jobVal==='uploadFile'){
+        const inp = document.getElementById('joption2');
+        if(inp.files.length){
+          statusMessage.textContent='Converting job file…';
+          const jd = await fileToBase64(inp.files[0]);
+          formData.append('has_job_file','true');
+          formData.append('job_filename',jd.name);
+          formData.append('job_filetype',jd.type);
+          formData.append('job_filesize',jd.size);
+          formData.append('job_file_base64',jd.base64);
+        }
+      }
+      if(resumeVal==='uploadFile'){
+        const inp = document.getElementById('roption2');
+        formData.append('resume_count',inp.files.length);
+        for(let i=0;i<inp.files.length;i++){
+          statusMessage.textContent=`Converting resume ${i+1} of ${inp.files.length}…`;
+          const rd = await fileToBase64(inp.files[i]);
+          formData.append(`resume_filename_${i}`,rd.name);
+          formData.append(`resume_filetype_${i}`,rd.type);
+          formData.append(`resume_filesize_${i}`,rd.size);
+          formData.append(`resume_file_base64_${i}`,rd.base64);
+        }
+      }
+      return formData;
+    }
+
+    //
+    // --- MAKE.COM POLLING ---
+    //
+    let pollingInterval=null, submissionId=null;
+    function startPolling(id){
+      submissionId=id;
+      statusMessage.textContent='Waiting for processing to complete…';
+      setTimeout(_=>{
+        checkCompletionStatus();
+        pollingInterval=setInterval(checkCompletionStatus,3000);
+      },6000);
+      setTimeout(_=>{
+        if(pollingInterval){
+          clearInterval(pollingInterval);
+          if(!scoreLog.isComplete){
+            statusMessage.textContent='Taking longer than expected… redirecting…';
+            setTimeout(markProcessingComplete,2000);
+          }
+        }
+      },300000);
+    }
+    function stopPolling(){
+      if(pollingInterval){ clearInterval(pollingInterval); pollingInterval=null; }
+    }
+    function checkCompletionStatus(){
+      if(!submissionId) return console.error('No submissionId for polling');
+      const url = `https://hook.us1.make.com/jww4g7mnladsf1zyr5y20uyfnupjx8r5?submissionId=${submissionId}`;
+      fetch(url)
+        .then(r=>{
+          const ct=r.headers.get('content-type');
+          return ct&&ct.includes('application/json')?r.json():r.text().then(t=>{
+            try{ return JSON.parse(t); }catch{ return {status:'error',message:'Non-JSON response',html:t}; }
+          });
+        })
+        .then(data=>{
+          console.log('Polling response:',data);
+          if(data.status==='complete'){
+            stopPolling();
+            statusMessage.textContent='Processing complete! Preparing results…';
+            if(Array.isArray(data.scores)){
+              data.scores.forEach(s=>logCandidateScore(s.candidateId,s.score,s.details));
+            } else markProcessingComplete();
+          }
+          else if(data.status==='processing'){
+            statusMessage.textContent=`Still processing: ${data.message||'Please wait…'}`;
+          }
+          else if(data.status==='error'){
+            stopPolling();
+            statusMessage.textContent=`Error: ${data.message||'Unknown error'}`;
+            const fr=document.getElementById('formResponse');
+            fr.textContent=data.message||'An error occurred'; fr.className='form-response error';
+            fr.style.display='block';
+          }
+          else if(data.html){
+            stopPolling(); markProcessingComplete();
+          }
+        })
+        .catch(err=>console.error('Polling error:',err));
+    }
+
+    //
+    // --- ZOHO SUBMISSION (multi‐approach) ---
+    //
+    function addFieldToForm(frm,name,value){
+      const i=document.createElement('input');
+      i.type='hidden'; i.name=name; i.value=value;
+      frm.appendChild(i);
+      return i;
+    }
+
+    function submitToZoho(username,submissionId){
+      try{
+        console.log('Zoho submission…',{username,submissionId});
+        // Prepare common formData
+        const jf = new FormData();
+        jf.append('xnQsjsdp','c926119bee12dc8f08205de11ea3b3aacd4c5a3a62a56b74a2930b71bafaf16e');
+        jf.append('xmIwtLD','f30e0a943e797ef60433df92883e1f46a11ee0ddd9059596f41499a55c918e99');
+        jf.append('actionType','TGVhZHM=');
+        jf.append('returnURL','');
+        jf.append('Username',username);
+        jf.append('Submission ID',submissionId);
+        jf.append('Added Time',new Date().toISOString());
+        jf.append('Referrer Name',document.referrer||window.location.href||'Unknown');
+        // Job & resume & questions (text‐only)…
+        jf.append('Job Source',jobSelect.value);
+        if(jobSelect.value==='publicURL') jf.append('Job URL',document.getElementById('joption1').value||'');
+        else if(jobSelect.value==='pasteText') jf.append('Job Paste',document.getElementById('joption3').value||'');
+
+        jf.append('Resume Source',resumeSelect.value);
+        if(resumeSelect.value==='publicURL') jf.append('Resume(s) URL',document.getElementById('roption1').value||'');
+        else if(resumeSelect.value==='pasteText'){
+          document.querySelectorAll('.resume-textarea').forEach((ta,i)=>{
+            if(ta.value.trim()){
+              const num=i+1;
+              jf.append(`Resume Paste ${num}`,ta.value);
+              if(num===1) jf.append('Resume Paste',ta.value);
+            }
+          });
+        }
+        if(posSelect.value==='yes'){
+          ['question1','question2','question3'].forEach((qid,i)=>{
+            const val=document.getElementById(qid).value.trim();
+            if(val) jf.append(`Question ${i+1}`,val);
+          });
+          jf.append('Additional Questions','yes');
+        } else jf.append('Additional Questions','no');
+
+        // APPROACH 1: fetch
+        fetch('https://forms.zohopublic.com/xoo/form/ResumeScreenerDynamicFiles/formperma/pjPYaosmnAbiv52anOuMikTY1WLRcIJuHqmUfs3VlGU/htmlRecords/submit',{
+          method:'POST',
+          body:jf,
+          mode:'no-cors'
+        })
+        .then(r=>console.log('Zoho fetch responded:',r))
+        .catch(e=>{
+          console.error('Zoho fetch failed:',e);
+          useWindowOpenApproach();
+        });
+
+        // APPROACH 2: window.open form
+        function useWindowOpenApproach(){
+          console.log('Zoho fallback window.open…');
+          const zf=document.createElement('form');
+          zf.style.display='none';
+          zf.method='POST';
+          zf.target='_blank';
+          zf.action='https://forms.zohopublic.com/xoo/form/ResumeScreenerDynamicFiles/formperma/pjPYaosmnAbiv52anOuMikTY1WLRcIJuHqmUfs3VlGU/htmlRecords/submit';
+          document.body.appendChild(zf);
+          // clone fields from jf
+          for(let [k,v] of jf.entries()){
+            addFieldToForm(zf,k,v);
+          }
+          // clone file inputs if any
+          if(jobSelect.value==='uploadFile'){
+            const inp=document.getElementById('joption2');
+            if(inp.files.length){
+              const dt=new DataTransfer();
+              dt.items.add(inp.files[0]);
+              const ci=document.createElement('input');
+              ci.type='file'; ci.name='Job Upload'; ci.files=dt.files;
+              zf.appendChild(ci);
+            }
+          }
+          if(resumeSelect.value==='uploadFile'){
+            const inp=document.getElementById('roption2');
+            for(let f of inp.files){
+              const dt=new DataTransfer();
+              dt.items.add(f);
+              const ci=document.createElement('input');
+              ci.type='file'; ci.name='Resume(s) Upload'; ci.files=dt.files;
+              zf.appendChild(ci);
+            }
+          }
+          // try to get IP
+          fetch('https://api.ipify.org?format=json')
+            .then(r=>r.json())
+            .then(d=>addFieldToForm(zf,'IP Address',d.ip))
+            .finally(_=>{
+              zf.submit();
+              setTimeout(()=>document.body.removeChild(zf),2000);
+            });
+        }
+      }
+      catch(err){ console.error('Zoho ultimate fallback error:',err); }
+    }
+
+    //
+    // --- ADD / REMOVE RESUME TEXTAREAS ---
+    //
+    let resumeCount=1;
+    const container=document.getElementById('resume-textareas-container'),
+          resumeCountInfo=document.getElementById('resume-count-info'),
+          addBtn=document.getElementById('add-resume-button');
+
+    function updateResumeCount(){
+      resumeCountInfo.textContent=`${resumeCount} of ${MAX_RESUMES} resumes`;
+      if(resumeCount>=MAX_RESUMES){
+        addBtn.disabled=true; addBtn.style.opacity='0.5'; addBtn.style.cursor='not-allowed';
+      } else {
+        addBtn.disabled=false; addBtn.style.opacity='1'; addBtn.style.cursor='pointer';
+      }
+    }
+    addBtn.addEventListener('click',function(){
+      if(resumeCount>=MAX_RESUMES){ alert(`Max ${MAX_RESUMES} resumes.`); return; }
+      resumeCount++;
+      const w=document.createElement('div');
+      w.className='resume-textarea-wrapper';
+      w.innerHTML=`
+        <label for="roption3-${resumeCount}">Option 3: Paste Resume #${resumeCount}</label>
+        <textarea id="roption3-${resumeCount}" name="roption3-${resumeCount}" class="resume-textarea"
+                  placeholder="Copy and paste your resume here"></textarea>
+        <small>You can resize this text box by dragging the bottom-right corner</small>
+        <button type="button" class="remove-resume-button" title="Remove this resume">×</button>
+      `;
+      container.appendChild(w);
+      const rem=w.querySelector('.remove-resume-button');
+      rem.addEventListener('click',function(){
+        container.removeChild(w);
+        resumeCount--;
+        // renumber
+        container.querySelectorAll('.resume-textarea-wrapper').forEach((wr,i)=>{
+          const num=i+1;
+          wr.querySelector('label').setAttribute('for',`roption3-${num}`);
+          wr.querySelector('label').textContent=`Option 3: Paste Resume #${num}`;
+          const ta=wr.querySelector('textarea');
+          ta.id=`roption3-${num}`; ta.name=`roption3-${num}`;
+        });
+        updateResumeCount();
+      });
+      updateResumeCount();
+    });
+
+    // no-remove on the first wrapper
+    document.querySelectorAll('.resume-textarea-wrapper').forEach((wr,i)=>{
+      if(i===0) return;
+      const rem=document.createElement('button');
+      rem.type='button'; rem.className='remove-resume-button'; rem.textContent='×'; rem.title='Remove this resume';
+      wr.appendChild(rem);
+      rem.addEventListener('click',function(){
+        wr.parentNode.removeChild(wr);
+        resumeCount--;
+        updateResumeCount();
+      });
+    });
+    updateResumeCount();
+
+    //
+    // --- COUNT RESUMES FOR POLLING LOGIC ---
+    //
+    function countUploadedResumes(formData){
+      let c=0, src=formData.get('resume');
+      if(src==='uploadFile'){
+        c=document.getElementById('roption2').files.length;
+      } else if(src==='pasteText'){
+        let i=1;
+        while(formData.has(`roption3-${i}`)){
+          if(formData.get(`roption3-${i}`).trim()) c++;
+          i++;
+        }
+      } else if(src==='publicURL'){
+        if(formData.get('roption1')?.trim()) c=1;
+      }
+      return c>0?c:1;
+    }
+
+    //
+    // --- SUBMIT HANDLER ---
+    //
+    document.getElementById('customResumeForm').addEventListener('submit',function(evt){
+      evt.preventDefault();
+
+      // 1) EXTRACT USERNAME ONCE
+      const username = extractUsername();
+      document.getElementById('username').value = username;
+      console.log('Using username for submission:', username);
+
+      // 2) VALIDATE
+      if(!jobSelect.value){ alert('Please select a job source in Step 1.'); jobSelect.focus(); return false; }
+      if(jobSelect.value==='pasteText' && !document.getElementById('joption3').value.trim()){
+        alert('Please paste a job description.'); document.getElementById('joption3').focus(); return false;
+      }
+      if(!resumeSelect.value){ alert('Please select a resume source in Step 2.'); resumeSelect.focus(); return false; }
+      if(resumeSelect.value==='pasteText'){
+        const hasOne = Array.from(document.querySelectorAll('.resume-textarea')).some(ta=>ta.value.trim());
+        if(!hasOne){ alert('Please paste at least one resume.'); document.querySelector('.resume-textarea').focus(); return false; }
+      }
+
+      // 3) GENERATE SUBMISSION ID
+      const subId = username + '_' + Date.now();
+      document.getElementById('submissionId').value = subId;
+
+      // 4) PREPARE MAKE.COM FORM DATA
+      const makeFD = new FormData(this);
+      makeFD.append('submissionId', subId);
+      makeFD.set('username', username);
+      window.uploadedResumeCount = countUploadedResumes(makeFD);
+
+      // 5) SHOW LOADING OVERLAY
+      showLoadingAnimation();
+      statusMessage.textContent='Processing your submission…';
+
+      // 6) SEND TO MAKE.COM
+      processFilesToBase64(makeFD)
+        .then(fd=>{
+          if(!fd.get('username')) fd.set('username',username);
+          return fetch('https://hook.us1.make.com/n2qll3gblut2oqd6x7x149i650l3s1dx',{method:'POST',body:fd});
+        })
+        .then(resp=>{
+          if(!resp.ok) throw new Error(`Status ${resp.status}`);
+          console.log('Submitted to Make.com');
+          statusMessage.textContent='Processing your data. Please wait…';
+          startPolling(subId);
+        })
+        .catch(err=>{
+          console.error('Make.com error:', err);
+          statusMessage.textContent='Error with Make.com. Continuing…';
+          startPolling(subId);
+        });
+
+      // 7) ALSO SUBMIT TO ZOHO IN PARALLEL
+      submitToZoho(username, subId);
+
+      return false;
+    });
+
+    // CLEANUP
+    window.addEventListener('beforeunload',function(){
+      if(pollingInterval) clearInterval(pollingInterval);
+    });
+
+    // DEBUG EVENTS
+    document.addEventListener('scoreAdded',e=>console.log('ScoreAdded',e.detail));
+    document.addEventListener('scoringComplete',e=>console.log('ScoringComplete',e.detail));
   });
-</script>
+  </script>
+</body>
+</html>
